@@ -38,3 +38,36 @@ int main(void) {
 	listar(listaDoble);
 	return 0;
 }
+void insertarFinal(Nodo*& listaDoble, Person valor)
+{
+	Nodo* nuevoNodo, * ultimo;
+	nuevoNodo = new Nodo;
+	nuevoNodo->dato = valor;
+	nuevoNodo->sgte = NULL;
+	if (listaDoble == NULL) {
+		nuevoNodo->ant = NULL;
+		listaDoble = nuevoNodo;
+	}
+	else {
+		ultimo = listaDoble;
+		while (ultimo->sgte != NULL) {
+			ultimo = ultimo->sgte;
+		}
+		ultimo->sgte = nuevoNodo;
+		nuevoNodo->ant = ultimo;
+	}
+}
+void listar(Nodo* listaDoble) {
+	Nodo* ultimo = listaDoble, * actual;
+	while (ultimo->sgte != NULL) {
+		ultimo = ultimo->sgte;
+	}
+	actual = ultimo;
+	while (actual != NULL) {
+		cout << actual->dato.name << endl;
+		cout << actual->dato.age << endl;
+		cout << actual->dato.height << endl;
+		cout << endl << endl;
+		actual = actual->ant;
+	}
+}
